@@ -1,0 +1,6 @@
+Use a daemon set instead of replica set?
+
+1. As daemonSet makes sure that it create one pod on each node in cluster, while replicaset distributes the pods across cluster and make sure those are scaled too. So daemonset is used in cases like log collector application
+  pods or any intrastructure monitoring pods which perform system-level operations.
+
+2. In case if a node goes down pods created by daemon set for that node will be deleted while as replicaset will recreate the deleted pods on other nodes avalible in the cluster.

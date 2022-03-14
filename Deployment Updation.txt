@@ -1,0 +1,16 @@
+Suppose you have deployed your application using a deployment controller. Assume the initial number of replicas is one. Write the steps needed to update a container's image using deployment, making sure that there is zero downtime.
+
+1. Edit the deployment and add below parameters for rolling update and zero downtime
+
+Strategy - Rolling Update
+minReadySeconds - tells Kubernetes how long it should wait until it creates the next pod. This property ensures that all application pods are in the ready state during the update.
+maxSurge - specifies the maximum number (or percentage) of pods above the specified number of replicas. In the example above, the maximum number of pods will be 5 since 4 replicas are specified in the yaml file.
+maxUnavailable - declares the maximum number (or percentage) of unavailable pods during the update. 
+
+2. And with kubectl set image deployment set the new images to be used for this deployement.
+
+3. Apart from this kubernates also has feature - readinessProbe which checks the status of the pods before going for rolling update of next pods. Below are parameters
+
+initialDelaySeconds - specifies how long the probe has to wait to start after the container starts.
+periodSeconds -  is the time between two probes. The default is 10 seconds, while the minimal value is 1 second.
+successThreshold -  is the minimum number of consecutive successful probes after a failed one for the entire process to be considered successful. The default and minimal values are both 1.
